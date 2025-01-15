@@ -12,4 +12,14 @@ public class UserService {
 
         userDao.insertUser(user);
     }
+
+    public int login(User user) {
+        String originPassword = user.getPassword();
+
+        user.setPassword("암호화됨" + originPassword);
+
+        int userIdx = userDao.login(user);
+
+        return userIdx;
+    }
 }
