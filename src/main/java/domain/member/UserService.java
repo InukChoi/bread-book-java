@@ -1,10 +1,19 @@
 package domain.member;
 
-import global.common.DbConnection;
+import global.common.HikariCp;
+
+import java.sql.SQLException;
 
 public class UserService {
     private UserDao userDao;
-    public UserService() {this.userDao = new UserDao(DbConnection.getConnection());}
+    public UserService() {
+        try {
+            this.userDao = new UserDao(HikariCp.getConnection());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
     public void signup(User user) {
         String originPassword = user.getPassword();
 

@@ -3,6 +3,7 @@ package global.common;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import static global.common.Constants.*;
@@ -26,7 +27,7 @@ public class HikariCp {
 
     private HikariCp() {}
 
-    public static HikariDataSource getDataSource() {
+    public static DataSource getDataSource() {
         return ds;
     }
 
