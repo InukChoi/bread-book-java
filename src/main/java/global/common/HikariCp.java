@@ -3,14 +3,18 @@ package global.common;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import static global.common.Constants.*;
+
 public class HikariCp {
     private static HikariDataSource ds;
     static {
         HikariConfig config = new HikariConfig();
-        // DB URL 변경하기
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/abc");
-        config.setUsername("root");
-        config.setPassword("qwer1234");
+        // db url 변경해야함
+        config.setJdbcUrl(DB_URL);
+        config.setUsername(DB_USERNAME);
+        config.setPassword(DB_PASSWORD);
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
@@ -18,5 +22,15 @@ public class HikariCp {
         config.setMaximumPoolSize(10);
 
         ds = new HikariDataSource(config);
+    }
+
+    private HikariCp() {}
+
+    public static HikariDataSource getDataSource() {
+        return ds;
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return ds.getConnection();
     }
 }
