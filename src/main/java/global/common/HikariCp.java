@@ -7,7 +7,8 @@ public class HikariCp {
     private static HikariDataSource ds;
     static {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://ip.주소.입력.하기:3306/db이름입력하기");
+        // DB URL 변경하기
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/abc");
         config.setUsername("root");
         config.setPassword("qwer1234");
         config.addDataSourceProperty("cachePrepStmts", "true");
